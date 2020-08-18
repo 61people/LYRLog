@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9DBCEF2924EC2B0100B71ED7 /* LYRLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBCEF1F24EC2B0100B71ED7 /* LYRLog.framework */; };
+		9DBCEF2E24EC2B0100B71ED7 /* LYRLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF2D24EC2B0100B71ED7 /* LYRLogTests.m */; };
+		9DBCEF3024EC2B0100B71ED7 /* LYRLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DBCEF2224EC2B0100B71ED7 /* LYRLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9DBCEF3D24EC2F8000B71ED7 /* LYRLogEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DBCEF3B24EC2F8000B71ED7 /* LYRLogEngine.h */; };
+		9DBCEF3E24EC2F8000B71ED7 /* LYRLogEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF3C24EC2F8000B71ED7 /* LYRLogEngine.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9DBCEF2A24EC2B0100B71ED7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DBCEF1624EC2B0100B71ED7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DBCEF1E24EC2B0100B71ED7;
+			remoteInfo = LYRLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9DBCEF1F24EC2B0100B71ED7 /* LYRLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LYRLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DBCEF2224EC2B0100B71ED7 /* LYRLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYRLog.h; sourceTree = "<group>"; };
+		9DBCEF2324EC2B0100B71ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DBCEF2824EC2B0100B71ED7 /* LYRLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LYRLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DBCEF2D24EC2B0100B71ED7 /* LYRLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogTests.m; sourceTree = "<group>"; };
+		9DBCEF2F24EC2B0100B71ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DBCEF3B24EC2F8000B71ED7 /* LYRLogEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYRLogEngine.h; sourceTree = "<group>"; };
+		9DBCEF3C24EC2F8000B71ED7 /* LYRLogEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogEngine.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9DBCEF1C24EC2B0100B71ED7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DBCEF2524EC2B0100B71ED7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DBCEF2924EC2B0100B71ED7 /* LYRLog.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9DBCEF1524EC2B0100B71ED7 = {
+			isa = PBXGroup;
+			children = (
+				9DBCEF2124EC2B0100B71ED7 /* LYRLog */,
+				9DBCEF2C24EC2B0100B71ED7 /* LYRLogTests */,
+				9DBCEF2024EC2B0100B71ED7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9DBCEF2024EC2B0100B71ED7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9DBCEF1F24EC2B0100B71ED7 /* LYRLog.framework */,
+				9DBCEF2824EC2B0100B71ED7 /* LYRLogTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9DBCEF2124EC2B0100B71ED7 /* LYRLog */ = {
+			isa = PBXGroup;
+			children = (
+				9DBCEF2224EC2B0100B71ED7 /* LYRLog.h */,
+				9DBCEF3B24EC2F8000B71ED7 /* LYRLogEngine.h */,
+				9DBCEF3C24EC2F8000B71ED7 /* LYRLogEngine.m */,
+				9DBCEF2324EC2B0100B71ED7 /* Info.plist */,
+			);
+			path = LYRLog;
+			sourceTree = "<group>";
+		};
+		9DBCEF2C24EC2B0100B71ED7 /* LYRLogTests */ = {
+			isa = PBXGroup;
+			children = (
+				9DBCEF2D24EC2B0100B71ED7 /* LYRLogTests.m */,
+				9DBCEF2F24EC2B0100B71ED7 /* Info.plist */,
+			);
+			path = LYRLogTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9DBCEF1A24EC2B0100B71ED7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DBCEF3024EC2B0100B71ED7 /* LYRLog.h in Headers */,
+				9DBCEF3D24EC2F8000B71ED7 /* LYRLogEngine.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9DBCEF1E24EC2B0100B71ED7 /* LYRLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DBCEF3324EC2B0100B71ED7 /* Build configuration list for PBXNativeTarget "LYRLog" */;
+			buildPhases = (
+				9DBCEF1A24EC2B0100B71ED7 /* Headers */,
+				9DBCEF1B24EC2B0100B71ED7 /* Sources */,
+				9DBCEF1C24EC2B0100B71ED7 /* Frameworks */,
+				9DBCEF1D24EC2B0100B71ED7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LYRLog;
+			productName = LYRLog;
+			productReference = 9DBCEF1F24EC2B0100B71ED7 /* LYRLog.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9DBCEF2724EC2B0100B71ED7 /* LYRLogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DBCEF3624EC2B0100B71ED7 /* Build configuration list for PBXNativeTarget "LYRLogTests" */;
+			buildPhases = (
+				9DBCEF2424EC2B0100B71ED7 /* Sources */,
+				9DBCEF2524EC2B0100B71ED7 /* Frameworks */,
+				9DBCEF2624EC2B0100B71ED7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9DBCEF2B24EC2B0100B71ED7 /* PBXTargetDependency */,
+			);
+			name = LYRLogTests;
+			productName = LYRLogTests;
+			productReference = 9DBCEF2824EC2B0100B71ED7 /* LYRLogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9DBCEF1624EC2B0100B71ED7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = LYR;
+				TargetAttributes = {
+					9DBCEF1E24EC2B0100B71ED7 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					9DBCEF2724EC2B0100B71ED7 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 9DBCEF1924EC2B0100B71ED7 /* Build configuration list for PBXProject "LYRLog" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9DBCEF1524EC2B0100B71ED7;
+			productRefGroup = 9DBCEF2024EC2B0100B71ED7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9DBCEF1E24EC2B0100B71ED7 /* LYRLog */,
+				9DBCEF2724EC2B0100B71ED7 /* LYRLogTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9DBCEF1D24EC2B0100B71ED7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DBCEF2624EC2B0100B71ED7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9DBCEF1B24EC2B0100B71ED7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DBCEF3E24EC2F8000B71ED7 /* LYRLogEngine.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DBCEF2424EC2B0100B71ED7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DBCEF2E24EC2B0100B71ED7 /* LYRLogTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9DBCEF2B24EC2B0100B71ED7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9DBCEF1E24EC2B0100B71ED7 /* LYRLog */;
+			targetProxy = 9DBCEF2A24EC2B0100B71ED7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9DBCEF3124EC2B0100B71ED7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9DBCEF3224EC2B0100B71ED7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9DBCEF3424EC2B0100B71ED7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = LYRLog/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyr.LYRLog;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9DBCEF3524EC2B0100B71ED7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = LYRLog/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyr.LYRLog;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9DBCEF3724EC2B0100B71ED7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LYRLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyr.LYRLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9DBCEF3824EC2B0100B71ED7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LYRLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyr.LYRLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9DBCEF1924EC2B0100B71ED7 /* Build configuration list for PBXProject "LYRLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DBCEF3124EC2B0100B71ED7 /* Debug */,
+				9DBCEF3224EC2B0100B71ED7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9DBCEF3324EC2B0100B71ED7 /* Build configuration list for PBXNativeTarget "LYRLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DBCEF3424EC2B0100B71ED7 /* Debug */,
+				9DBCEF3524EC2B0100B71ED7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9DBCEF3624EC2B0100B71ED7 /* Build configuration list for PBXNativeTarget "LYRLogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DBCEF3724EC2B0100B71ED7 /* Debug */,
+				9DBCEF3824EC2B0100B71ED7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9DBCEF1624EC2B0100B71ED7 /* Project object */;
+}
