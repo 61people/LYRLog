@@ -9,15 +9,21 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, LYRLogLevel) {
-    LYRLogLevelDebug = 0,
+    LYRLogLevelOnline = 0,
     LYRLogLevelGray = 1,
-    LYRLogLevelOnline =2
+    LYRLogLevelDebug =2
 };
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LYRLogEngine : NSObject
 
+@property (nonatomic, copy) NSString *basePath;
+@property (nonatomic, copy) NSString *subPath;
+@property (nonatomic, assign) LYRLogLevel level;
 
++ (instancetype)sharedInstance;
+
+- (void)logWithLevel:(LYRLogLevel)level module:(NSString *)module format:(NSString *)format, ...;
 
 @end
 
