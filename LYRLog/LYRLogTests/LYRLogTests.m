@@ -17,8 +17,6 @@
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    [LYRLogEngine sharedInstance].level = LYRLogLevelDebug;
-    [LYRLogEngine sharedInstance].basePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
 }
 
 - (void)tearDown {

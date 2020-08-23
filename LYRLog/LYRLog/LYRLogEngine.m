@@ -55,6 +55,7 @@
     va_end(args);
 }
 
+#pragma mark - log queue
 - (void)enqueueLogStr:(NSString *)logStr {
     if (logStr.length <= 0) {
         return;
@@ -70,11 +71,43 @@
     allLogStrArr = [self.logStrQueue copy];
     [self.logStrQueue removeAllObjects];
     dispatch_semaphore_signal(self.logStrSemaphore);
+    
     return allLogStrArr;
 }
 
+#pragma mark - write
 - (void)writeLog {
-    
+    if (!self.basePath) {
+        return;
+    }
+    dispatch_async(self.writeFileSerialQueue, ^{
+        
+        NSString *filePath = [self.basePath stringByAppendingPathComponent:@"test.log"];
+        
+        
+        NSMutableData *data = [NSMutableData data];
+        
+        for (NSString *logStr in [self dequeueAllLogStr]) {
+            NSData *logData = [[logStr stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding];
+            [data appendData:logData];
+        }
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+            
+            unsigned long long offset = 0;
+            NSError *err = nil;
+            [fileHandle seekToEndReturningOffset:&offset error:&err];
+            
+            [fileHandle writeData:data error:nil];
+            
+            [fileHandle closeAndReturnError:nil];
+        }
+        else {
+            [[NSFileManager defaultManager] createFileAtPath:filePath contents:data attributes:nil];
+        }
+        
+    });
 }
 
 @end

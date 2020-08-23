@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LYRLogEngine : NSObject
 
 @property (nonatomic, copy) NSString *basePath;
-@property (nonatomic, copy) NSString *subPath;
 @property (nonatomic, assign) LYRLogLevel level;
 
 + (instancetype)sharedInstance;
