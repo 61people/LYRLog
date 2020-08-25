@@ -7,11 +7,16 @@
 //
 
 #import "LYRLogEngine.h"
+
+static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
+
 @interface LYRLogEngine ()
 
 @property (nonatomic, strong) NSMutableArray<NSString *> *logStrQueue;
 @property (nonatomic, strong) dispatch_queue_t writeFileSerialQueue;
 @property (nonatomic, strong) dispatch_semaphore_t logStrSemaphore;
+@property (nonatomic, strong) NSDateFormatter *localDateFormatter;
+@property (nonatomic, strong) NSDateFormatter *baselineDateFormatter;
 
 @end
 
@@ -31,6 +36,11 @@
         _logStrQueue = [NSMutableArray array];
         _writeFileSerialQueue = dispatch_queue_create("com.lyr.lyrlog.writequeue", DISPATCH_QUEUE_SERIAL);
         _logStrSemaphore = dispatch_semaphore_create(1);
+        _localDateFormatter = [[NSDateFormatter alloc] init];
+        [_localDateFormatter setDateFormat:kLYRDateFormatterString];
+        _baselineGMT = 8;
+        
+        
     }
     return self;
 }
@@ -39,20 +49,36 @@
     
     if (level > self.level) {
         // if we set self.level = LYRLogLevelGray,
-        // only paramter level who smaller or equl self.level can log,
+        // only paramter level who smaller than or equl to self.level can log,
         // that means LYRLogLevelOnline and LYRLogLevelGray can log
         // LYRLogLevelDebug can't
         return;
     }
     
-    NSString *prefix = [NSString stringWithFormat:@"%@: %@", module, format];
+    NSString *prefix = [NSString stringWithFormat:@"%@|%@: %@", [self timeStamp], module, format];
     
     va_list args;
     va_start(args, format);
     NSString *fullLogStr = [[NSString alloc] initWithFormat:prefix arguments:args];
+#if DEBUG
     printf("%s\n", [fullLogStr UTF8String]);
+#endif
     [self enqueueLogStr:fullLogStr];
     va_end(args);
+}
+
+- (NSString *)timeStamp {
+    NSDate *date = [NSDate now];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS Z"];
+    NSDateFormatter *baseLineFormatter = [[NSDateFormatter alloc] init];
+    
+    [baseLineFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS Z"];
+    [baseLineFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:self.baselineGMT * 60 * 60]];
+    
+    NSString *timeStamp = [NSString stringWithFormat:@"%@|%@", [dateFormatter stringFromDate:date], [baseLineFormatter stringFromDate:date]];
+    
+    return timeStamp;
 }
 
 #pragma mark - log queue
@@ -92,22 +118,25 @@
             [data appendData:logData];
         }
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
-            
-            unsigned long long offset = 0;
-            NSError *err = nil;
-            [fileHandle seekToEndReturningOffset:&offset error:&err];
-            
-            [fileHandle writeData:data error:nil];
-            
-            [fileHandle closeAndReturnError:nil];
-        }
-        else {
-            [[NSFileManager defaultManager] createFileAtPath:filePath contents:data attributes:nil];
-        }
+        NSOutputStream *outPutStream = [[NSOutputStream alloc] initToFileAtPath:filePath append:YES];
         
+        [outPutStream open];
+        [outPutStream write:[data bytes] maxLength:[data length]];
+        [outPutStream close];
+                
     });
+}
+
+- (void)setBaselineGMT:(NSInteger)baselineGMT {
+    if (baselineGMT > 12) {
+        _baselineGMT = 12;
+    }
+    else if (baselineGMT < -12) {
+        _baselineGMT = -12;
+    }
+    else {
+        _baselineGMT = baselineGMT;
+    }
 }
 
 @end

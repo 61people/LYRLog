@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, assign) LYRLogLevel level;
 
+/// offset from Greenwich Mean Time, -12 to 12, default is Beijing +8
+@property (nonatomic, assign) NSInteger baselineGMT;
+
 + (instancetype)sharedInstance;
 
 - (void)logWithLevel:(LYRLogLevel)level module:(NSString *)module format:(NSString *)format, ...;
