@@ -9,12 +9,17 @@
 #import "LYRLogEngine.h"
 
 static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
+static NSString * const kLYRLogSeparator = @"|";
 
 @interface LYRLogEngine ()
 
 @property (nonatomic, strong) NSMutableArray<NSString *> *logStrQueue;
 @property (nonatomic, strong) dispatch_queue_t writeFileSerialQueue;
 @property (nonatomic, strong) dispatch_semaphore_t logStrSemaphore;
+@property (nonatomic, strong) NSOutputStream *outputStream;
+@property (nonatomic, copy) NSString *outputFileName;
+
+
 @property (nonatomic, strong) NSDateFormatter *localDateFormatter;
 @property (nonatomic, strong) NSDateFormatter *baselineDateFormatter;
 
@@ -38,8 +43,11 @@ static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
         _logStrSemaphore = dispatch_semaphore_create(1);
         _localDateFormatter = [[NSDateFormatter alloc] init];
         [_localDateFormatter setDateFormat:kLYRDateFormatterString];
-        _baselineGMT = 8;
         
+        _baselineGMT = 8;
+        _baselineDateFormatter = [[NSDateFormatter alloc] init];
+        [_localDateFormatter setDateFormat:kLYRDateFormatterString];
+        [_localDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:_baselineGMT * 60 * 60]];
         
     }
     return self;
@@ -69,14 +77,8 @@ static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
 
 - (NSString *)timeStamp {
     NSDate *date = [NSDate now];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS Z"];
-    NSDateFormatter *baseLineFormatter = [[NSDateFormatter alloc] init];
     
-    [baseLineFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS Z"];
-    [baseLineFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:self.baselineGMT * 60 * 60]];
-    
-    NSString *timeStamp = [NSString stringWithFormat:@"%@|%@", [dateFormatter stringFromDate:date], [baseLineFormatter stringFromDate:date]];
+    NSString *timeStamp = [NSString stringWithFormat:@"%@|%@", [self.baselineDateFormatter stringFromDate:date], [self.localDateFormatter stringFromDate:date]];
     
     return timeStamp;
 }
@@ -110,20 +112,30 @@ static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
         
         NSString *filePath = [self.basePath stringByAppendingPathComponent:@"test.log"];
         
-        
-        NSMutableData *data = [NSMutableData data];
+        [self.outputStream open];
         
         for (NSString *logStr in [self dequeueAllLogStr]) {
+            
+            NSString *fileName = [self logFileNameFromLogStr:logStr];
+            
+            if (!self.outputStream) {
+                self.outputStream = [[NSOutputStream alloc] initToFileAtPath:[self.basePath stringByAppendingPathComponent:fileName] append:YES];
+                self.outputFileName = fileName;
+                [self.outputStream open];
+            }
+            else if (![self.outputFileName isEqualToString:fileName]) {
+                [self.outputStream close];
+                self.outputStream = [[NSOutputStream alloc] initToFileAtPath:[self.basePath stringByAppendingPathComponent:fileName] append:YES];
+                self.outputFileName = fileName;
+                [self.outputStream open];
+            }
+            
             NSData *logData = [[logStr stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding];
-            [data appendData:logData];
+            
+            [self.outputStream write:[logData bytes]  maxLength:[logData length]];
         }
-        
-        NSOutputStream *outPutStream = [[NSOutputStream alloc] initToFileAtPath:filePath append:YES];
-        
-        [outPutStream open];
-        [outPutStream write:[data bytes] maxLength:[data length]];
-        [outPutStream close];
-                
+        [self.outputStream close];
+                    
     });
 }
 
@@ -136,6 +148,17 @@ static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
     }
     else {
         _baselineGMT = baselineGMT;
+    }
+    [self.localDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:_baselineGMT * 60 * 60]];
+}
+
+- (NSString *)logFileNameFromLogStr:(NSString *)logStr {
+    NSString *timeStamp = [[logStr componentsSeparatedByString:kLYRLogSeparator] firstObject];
+    if (timeStamp.length >= 13) {
+        return [timeStamp substringToIndex:12];
+    }
+    else {
+        return nil;
     }
 }
 
