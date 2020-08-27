@@ -7,9 +7,8 @@
 //
 
 #import "LYRLogEngine.h"
-
-static NSString * const kLYRDateFormatterString = @"yyyy-MM-dd HH:mm:ss.SSS Z";
-static NSString * const kLYRLogSeparator = @"|";
+#import "LYRLogProcessor.h"
+#import "LYRLogStreamWriter.h"
 
 @interface LYRLogEngine ()
 
@@ -19,10 +18,9 @@ static NSString * const kLYRLogSeparator = @"|";
 @property (nonatomic, strong) NSOutputStream *outputStream;
 @property (nonatomic, copy) NSString *outputFileName;
 
+@property (nonatomic, strong) LYRLogProcessor *logProcessor;
 
-@property (nonatomic, strong) NSDateFormatter *localDateFormatter;
-@property (nonatomic, strong) NSDateFormatter *baselineDateFormatter;
-
+@property (nonatomic, strong) id <LYRLogWriterProtocol> logWriter;
 @end
 
 @implementation LYRLogEngine
@@ -41,14 +39,11 @@ static NSString * const kLYRLogSeparator = @"|";
         _logStrQueue = [NSMutableArray array];
         _writeFileSerialQueue = dispatch_queue_create("com.lyr.lyrlog.writequeue", DISPATCH_QUEUE_SERIAL);
         _logStrSemaphore = dispatch_semaphore_create(1);
-        _localDateFormatter = [[NSDateFormatter alloc] init];
-        [_localDateFormatter setDateFormat:kLYRDateFormatterString];
         
-        _baselineGMT = 8;
-        _baselineDateFormatter = [[NSDateFormatter alloc] init];
-        [_localDateFormatter setDateFormat:kLYRDateFormatterString];
-        [_localDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:_baselineGMT * 60 * 60]];
+        _logProcessor = [[LYRLogProcessor alloc] init];
         
+        _logWriter = [[LYRLogStreamWriter alloc] init];
+                
     }
     return self;
 }
@@ -63,24 +58,16 @@ static NSString * const kLYRLogSeparator = @"|";
         return;
     }
     
-    NSString *prefix = [NSString stringWithFormat:@"%@|%@: %@", [self timeStamp], module, format];
-    
     va_list args;
     va_start(args, format);
-    NSString *fullLogStr = [[NSString alloc] initWithFormat:prefix arguments:args];
+    
+    NSString *logString = [self.logProcessor logStringWithLevel:level module:module format:format args:args];
 #if DEBUG
-    printf("%s\n", [fullLogStr UTF8String]);
+    printf("%s\n", [logString UTF8String]);
 #endif
-    [self enqueueLogStr:fullLogStr];
+    [self enqueueLogStr:logString];
+    
     va_end(args);
-}
-
-- (NSString *)timeStamp {
-    NSDate *date = [NSDate now];
-    
-    NSString *timeStamp = [NSString stringWithFormat:@"%@|%@", [self.baselineDateFormatter stringFromDate:date], [self.localDateFormatter stringFromDate:date]];
-    
-    return timeStamp;
 }
 
 #pragma mark - log queue
@@ -110,8 +97,6 @@ static NSString * const kLYRLogSeparator = @"|";
     }
     dispatch_async(self.writeFileSerialQueue, ^{
         
-        NSString *filePath = [self.basePath stringByAppendingPathComponent:@"test.log"];
-        
         [self.outputStream open];
         
         for (NSString *logStr in [self dequeueAllLogStr]) {
@@ -140,22 +125,22 @@ static NSString * const kLYRLogSeparator = @"|";
 }
 
 - (void)setBaselineGMT:(NSInteger)baselineGMT {
-    if (baselineGMT > 12) {
-        _baselineGMT = 12;
-    }
-    else if (baselineGMT < -12) {
-        _baselineGMT = -12;
-    }
-    else {
-        _baselineGMT = baselineGMT;
-    }
-    [self.localDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:_baselineGMT * 60 * 60]];
+    self.logProcessor.baselineGMT = baselineGMT;
+}
+
+- (NSInteger)baselineGMT {
+    return self.logProcessor.baselineGMT;
+}
+
+- (void)setBasePath:(NSString *)basePath {
+    _basePath = basePath;
+    self.logWriter.basePath = basePath;
 }
 
 - (NSString *)logFileNameFromLogStr:(NSString *)logStr {
-    NSString *timeStamp = [[logStr componentsSeparatedByString:kLYRLogSeparator] firstObject];
+    NSString *timeStamp = [[logStr componentsSeparatedByString:@"|"] firstObject];
     if (timeStamp.length >= 13) {
-        return [timeStamp substringToIndex:12];
+        return [[timeStamp substringToIndex:13] stringByAppendingString:@".log"];
     }
     else {
         return nil;

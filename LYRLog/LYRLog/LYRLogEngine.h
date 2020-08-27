@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, LYRLogLevel) {
     LYRLogLevelGray = 1,
     LYRLogLevelDebug =2
 };
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LYRLogEngine : NSObject
