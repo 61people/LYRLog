@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LYRLogWriterProtocol.h"
+#import "LYRLogWriter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LYRLogStreamWriter : NSObject <LYRLogWriterProtocol>
+@interface LYRLogStreamWriter : LYRLogWriter
 
 @end
 

@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LYRLogEngine : NSObject
 
-@property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, assign) LYRLogLevel level;
 
+@property (nonatomic, copy) NSString *basePath;
 /// offset from Greenwich Mean Time, -12 to 12, default is Beijing +8
 @property (nonatomic, assign) NSInteger baselineGMT;
 
