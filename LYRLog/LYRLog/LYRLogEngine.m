@@ -9,16 +9,14 @@
 #import "LYRLogEngine.h"
 #import "LYRLogProcessor.h"
 #import "LYRLogStreamWriter.h"
+#import "LYRLogQueue.h"
 
 @interface LYRLogEngine () <LYRLogWriterDelegate>
 
-@property (nonatomic, strong) NSMutableArray<NSString *> *logStrQueue;
-
-@property (nonatomic, strong) dispatch_semaphore_t logStrSemaphore;
-
 @property (nonatomic, strong) LYRLogProcessor *logProcessor;
-
+@property (nonatomic, strong) LYRLogQueue *logQueue;
 @property (nonatomic, strong) LYRLogWriter *logWriter;
+
 @end
 
 @implementation LYRLogEngine
@@ -34,10 +32,10 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _logStrQueue = [NSMutableArray array];
-        _logStrSemaphore = dispatch_semaphore_create(1);
         
         _logProcessor = [[LYRLogProcessor alloc] init];
+        
+        _logQueue = [[LYRLogQueue alloc] init];
         
         _logWriter = [[LYRLogStreamWriter alloc] init];
         _logWriter.delegate = self;
@@ -63,29 +61,8 @@
 #if DEBUG
     printf("%s\n", [logString UTF8String]);
 #endif
-    [self enqueueLogStr:logString];
-    
+    [self.logQueue enqueueLogString:logString];
     va_end(args);
-}
-
-#pragma mark - log queue
-- (void)enqueueLogStr:(NSString *)logStr {
-    if (logStr.length <= 0) {
-        return;
-    }
-    dispatch_semaphore_wait(self.logStrSemaphore, DISPATCH_TIME_FOREVER);
-    [self.logStrQueue addObject:logStr];
-    dispatch_semaphore_signal(self.logStrSemaphore);
-}
-
-- (NSArray<NSString *> *)dequeueAllLogStr {
-    NSArray *allLogStrArr = nil;
-    dispatch_semaphore_wait(self.logStrSemaphore, DISPATCH_TIME_FOREVER);
-    allLogStrArr = [self.logStrQueue copy];
-    [self.logStrQueue removeAllObjects];
-    dispatch_semaphore_signal(self.logStrSemaphore);
-    
-    return allLogStrArr;
 }
 
 #pragma mark - write
@@ -111,7 +88,7 @@
 
 #pragma mark - LYRLogWriterDelegate
 - (NSArray<NSString *> *)writeLogWithLogWriter:(LYRLogWriter *)logWriter {
-    return [self dequeueAllLogStr];
+    return [self.logQueue dequeueAllLogString];
 }
 
 @end

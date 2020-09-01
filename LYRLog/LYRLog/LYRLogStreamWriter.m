@@ -2,7 +2,7 @@
 //  LYRLogStreamWriter.m
 //  LYRLog
 //
-//  Created by 刘奕任 on 2020/8/28.
+//  Created by 61people on 2020/8/28.
 //  Copyright © 2020 LYR. All rights reserved.
 //
 

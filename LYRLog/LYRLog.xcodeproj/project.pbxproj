@@ -20,6 +20,10 @@
 		9DBCEF4B24F8182A00B71ED7 /* LYRLogStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF4924F8182A00B71ED7 /* LYRLogStreamWriter.m */; };
 		9DBCEF4E24FC08CF00B71ED7 /* LYRLogWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DBCEF4C24FC08CF00B71ED7 /* LYRLogWriter.h */; };
 		9DBCEF4F24FC08CF00B71ED7 /* LYRLogWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF4D24FC08CF00B71ED7 /* LYRLogWriter.m */; };
+		9DBCEF5224FD4A5E00B71ED7 /* LYRLogQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DBCEF5024FD4A5E00B71ED7 /* LYRLogQueue.h */; };
+		9DBCEF5324FD4A5E00B71ED7 /* LYRLogQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF5124FD4A5E00B71ED7 /* LYRLogQueue.m */; };
+		9DBCEF5624FD53A700B71ED7 /* LYRLogMmapWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DBCEF5424FD53A600B71ED7 /* LYRLogMmapWriter.h */; };
+		9DBCEF5724FD53A700B71ED7 /* LYRLogMmapWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCEF5524FD53A700B71ED7 /* LYRLogMmapWriter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		9DBCEF4924F8182A00B71ED7 /* LYRLogStreamWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogStreamWriter.m; sourceTree = "<group>"; };
 		9DBCEF4C24FC08CF00B71ED7 /* LYRLogWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYRLogWriter.h; sourceTree = "<group>"; };
 		9DBCEF4D24FC08CF00B71ED7 /* LYRLogWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogWriter.m; sourceTree = "<group>"; };
+		9DBCEF5024FD4A5E00B71ED7 /* LYRLogQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYRLogQueue.h; sourceTree = "<group>"; };
+		9DBCEF5124FD4A5E00B71ED7 /* LYRLogQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogQueue.m; sourceTree = "<group>"; };
+		9DBCEF5424FD53A600B71ED7 /* LYRLogMmapWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYRLogMmapWriter.h; sourceTree = "<group>"; };
+		9DBCEF5524FD53A700B71ED7 /* LYRLogMmapWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYRLogMmapWriter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +104,14 @@
 				9DBCEF3C24EC2F8000B71ED7 /* LYRLogEngine.m */,
 				9DBCEF4124F8097100B71ED7 /* LYRLogProcessor.h */,
 				9DBCEF4224F8097100B71ED7 /* LYRLogProcessor.m */,
+				9DBCEF5024FD4A5E00B71ED7 /* LYRLogQueue.h */,
+				9DBCEF5124FD4A5E00B71ED7 /* LYRLogQueue.m */,
 				9DBCEF4C24FC08CF00B71ED7 /* LYRLogWriter.h */,
 				9DBCEF4D24FC08CF00B71ED7 /* LYRLogWriter.m */,
 				9DBCEF4824F8182A00B71ED7 /* LYRLogStreamWriter.h */,
 				9DBCEF4924F8182A00B71ED7 /* LYRLogStreamWriter.m */,
+				9DBCEF5424FD53A600B71ED7 /* LYRLogMmapWriter.h */,
+				9DBCEF5524FD53A700B71ED7 /* LYRLogMmapWriter.m */,
 				9DBCEF2324EC2B0100B71ED7 /* Info.plist */,
 			);
 			path = LYRLog;
@@ -126,6 +138,8 @@
 				9DBCEF4A24F8182A00B71ED7 /* LYRLogStreamWriter.h in Headers */,
 				9DBCEF4324F8097100B71ED7 /* LYRLogProcessor.h in Headers */,
 				9DBCEF4E24FC08CF00B71ED7 /* LYRLogWriter.h in Headers */,
+				9DBCEF5224FD4A5E00B71ED7 /* LYRLogQueue.h in Headers */,
+				9DBCEF5624FD53A700B71ED7 /* LYRLogMmapWriter.h in Headers */,
 				9DBCEF3024EC2B0100B71ED7 /* LYRLog.h in Headers */,
 				9DBCEF3D24EC2F8000B71ED7 /* LYRLogEngine.h in Headers */,
 			);
@@ -230,6 +244,8 @@
 			files = (
 				9DBCEF4B24F8182A00B71ED7 /* LYRLogStreamWriter.m in Sources */,
 				9DBCEF3E24EC2F8000B71ED7 /* LYRLogEngine.m in Sources */,
+				9DBCEF5724FD53A700B71ED7 /* LYRLogMmapWriter.m in Sources */,
+				9DBCEF5324FD4A5E00B71ED7 /* LYRLogQueue.m in Sources */,
 				9DBCEF4F24FC08CF00B71ED7 /* LYRLogWriter.m in Sources */,
 				9DBCEF4424F8097200B71ED7 /* LYRLogProcessor.m in Sources */,
 			);
