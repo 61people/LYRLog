@@ -14,7 +14,6 @@
 @interface LYRLogEngine () <LYRLogWriterDelegate>
 
 @property (nonatomic, strong) LYRLogProcessor *logProcessor;
-@property (nonatomic, strong) LYRLogQueue *logQueue;
 @property (nonatomic, strong) LYRLogWriter *logWriter;
 
 @end
@@ -35,9 +34,8 @@
         
         _logProcessor = [[LYRLogProcessor alloc] init];
         
-        _logQueue = [[LYRLogQueue alloc] init];
-        
         _logWriter = [[LYRLogStreamWriter alloc] init];
+        _logWriter.logQueue = [[LYRLogQueue alloc] init];
         _logWriter.delegate = self;
                 
     }
@@ -61,7 +59,7 @@
 #if DEBUG
     printf("%s\n", [logString UTF8String]);
 #endif
-    [self.logQueue enqueueLogString:logString];
+    [self.logWriter.logQueue enqueueLogString:logString];
     va_end(args);
 }
 
@@ -84,11 +82,6 @@
 
 - (void)setBasePath:(NSString *)basePath {
     self.logWriter.basePath = basePath;
-}
-
-#pragma mark - LYRLogWriterDelegate
-- (NSArray<NSString *> *)writeLogWithLogWriter:(LYRLogWriter *)logWriter {
-    return [self.logQueue dequeueAllLogString];
 }
 
 @end

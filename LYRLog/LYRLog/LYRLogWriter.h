@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LYRLogQueue.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,10 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LYRLogWriter : NSObject
 @property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, weak) id<LYRLogWriterDelegate> delegate;
-
-- (NSString *)logFileNameFromLogStr:(NSString *)logStr;
+@property (nonatomic, strong) LYRLogQueue *logQueue;
 
 - (void)writeLog;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

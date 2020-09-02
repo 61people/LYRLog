@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// offset from Greenwich Mean Time, -12 to 12, default is Beijing +8
 @property (nonatomic, assign) NSInteger baselineGMT;
 
+/// time unit is day, default is 30 days
+@property (nonatomic, assign) NSUInteger expiration;
+
+//@property (nonatomic, copy)
+
 + (instancetype)sharedInstance;
 
 - (void)logWithLevel:(LYRLogLevel)level module:(NSString *)module format:(NSString *)format, ...;

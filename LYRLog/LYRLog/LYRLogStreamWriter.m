@@ -7,6 +7,7 @@
 //
 
 #import "LYRLogStreamWriter.h"
+#import "LYRLogWriter+Private.h"
 
 @interface LYRLogStreamWriter ()
 
@@ -30,16 +31,12 @@
     if (!self.basePath) {
         return;
     }
-    if (![self.delegate respondsToSelector:@selector(writeLogWithLogWriter:)]) {
-        return;
-    }
+
     dispatch_async(self.writeFileSerialQueue, ^{
         
         [self.outputStream open];
-        
-        for (NSString *logStr in [self.delegate writeLogWithLogWriter:self]) {
-            
-            NSString *fileName = [self logFileNameFromLogStr:logStr];
+        for (LYRLogNode *logNode in [self.logQueue dequeueAllLogStringToNode]) {
+            NSString *fileName = [logNode.nodeName stringByAppendingString:@".log"];
             
             if (!self.outputStream) {
                 self.outputStream = [[NSOutputStream alloc] initToFileAtPath:[self.basePath stringByAppendingPathComponent:fileName] append:YES];
@@ -53,9 +50,11 @@
                 [self.outputStream open];
             }
             
-            NSData *logData = [[logStr stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding];
+            for (NSString *logString in logNode.logStringQueue) {
+                NSData *logData = [[logString stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding];
+                [self.outputStream write:[logData bytes]  maxLength:[logData length]];
+            }
             
-            [self.outputStream write:[logData bytes]  maxLength:[logData length]];
         }
         [self.outputStream close];
                     

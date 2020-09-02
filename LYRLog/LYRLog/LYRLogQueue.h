@@ -10,9 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface LYRLogNode : NSObject
+
+@property (nonatomic, strong) LYRLogNode *next;
+@property (nonatomic, copy) NSString *nodeName;
+@property (nonatomic, strong) NSMutableArray<NSString *> *logStringQueue;
+
+@end
+
 @interface LYRLogQueue : NSObject
 - (void)enqueueLogString:(NSString *)logString;
 - (NSArray<NSString *> *)dequeueAllLogString;
+- (LYRLogNode *)dequeueAllLogStringToNode;
 @end
 
 NS_ASSUME_NONNULL_END
